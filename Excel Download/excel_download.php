@@ -9,7 +9,7 @@ $qry=mysqli_query($mysqli_user,"SELECT `id` , `name` , `code` , `mobile` , `scen
 // print_r(mysqli_fetch_assoc($qry));
 // die;
 
-$data="Id".","."Name".","."Code".","."Mobile".","."Scene".","."Email".","."Video".","."Insert Time".","."\n";
+$data="Id".","."Name".","."Code".","."Mobile".","."Scene".","."Email".","."Video".","."Insert Time".","."Update Time".","."\n";
 while($row = mysqli_fetch_array($qry)) {
     // $row[3] = preg_replace('/\r|\n/','', $row[3]);
     // date('Y-m-d H:i:s', strtotime($row[4]. ' + 5 hours'));
