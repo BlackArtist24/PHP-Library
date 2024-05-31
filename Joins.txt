@@ -1,0 +1,10 @@
+1)) Left Outer Join  - "Select l.loanID , l.amount , l.branch , b.custID , b.custname from loan l left join borrower b on l.loanID = b.LoanID";
+ 
+2)) Right Outer Join - "Select l.loanid , l.branch , l.amount , b,custID , b.custname from loan l right join borrower b on l.loanId = b.LoanID";
+
+3)) Full Outer Join  - "Select l.loanID , l.branch , l.amount , b.custID , b.custname from loan l left join borrower b on l.loanID = b.LoanId UNION
+    			Select l.loanID , l.branch , l.amount , b.custID , b.custname from loan l right join borrwer b on l.loanID = b.LoanID";  
+
+4)) Inner Join       - "Select l.loanID , l.branch , l.amount , b.custID from loan l inner join borrower b ON l.loanID = b.LoanID";
+
+

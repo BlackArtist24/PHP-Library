@@ -1,0 +1,18 @@
+$obj = new Api();
+$urlParams = explode('/', $_SERVER['REQUEST_URI']);
+$functionName = end($urlParams);
+if (method_exists($obj, $functionName)) {
+    $obj->$functionName();
+} else {
+    echo json_encode(array('status' => false, 'message' => 'Invalid url.'));
+}
+
+// $obj = new Api();
+// $urlParams = explode('/', $_SERVER['REQUEST_URI']);
+// $functionName = end($urlParams);
+// $functionName = current(explode('?', $functionName));
+// if(method_exists($obj, $functionName)){
+//     $obj->$functionName();
+// }else{
+//     echo json_encode(array('status'=>false,'message'=>'Invalid url.'));  
+// }

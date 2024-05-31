@@ -1,0 +1,152 @@
+1))Creating Database
+
+<?php
+
+$servername="localhost";
+$username="root";
+$password="";
+
+$conn=mysqli_connect($servername,$username,$password);
+
+if(!$conn){
+
+die("Sorry connection was failed".mysqli_connect_error());
+}
+else
+{
+ echo "Connection was Successfull";
+}
+
+$sql="CREATE DATABASE db_test";
+$result=mysqli_query($conn,$sql);
+
+?>
+
+
+2))
+
+<?php
+$servername="localhost";
+$username="root";
+$password="";
+$database="db_test";
+
+$conn=mysqli_connect($servername,$username,$password,$database);
+
+if (!$conn){
+die("Sorry connection was failed".mysqli_connect_error())
+}
+else{
+echo "Connection was successfull";
+
+$sql="CREATE TABLE db_table(name varchar(25),address varchar(25))";
+$result=mysqli_query($conn,$sql);
+}
+?>
+
+3)) Insertion
+
+<?php
+$servername="localhost";
+$username="root";
+$password="";
+$database="db_test";
+
+$conn=mysqli_connect($servername,$username,$password,$database);
+
+if(!$conn){
+ die("Sorry connection was failed".mysqli_connect_error());
+}
+else{
+echo "Connection was successfull";
+}
+
+$sql="INSERT INTO db_table VALUES('Shiv','Delhi'),('John','Palwal')";
+$result=mysqli_query($conn,$sql)
+
+
+?
+
+4)) Select
+
+<?php
+
+$servername="localhost";
+$username="root";
+$password="";
+$database="db_test";
+
+
+$conn=mysqli_connect($servername,$username,$password,$database);
+
+if(!$conn){
+ die("Sorry we failed to connect".mysqli_connect_error())
+}
+else
+{echo "Connection was Successfull";
+}
+
+
+$sql="Select * from db_table";
+$result=mysqli_query($conn,$sql);
+
+
+?>
+
+5)) UPDATE
+
+<?php
+$servername="localhost";
+$username="root";
+$password="";
+$database="db_test";
+
+$conn=mysqli_connect($servername,$username,$password,$database);
+
+
+if(!$conn){
+  die("Sorry connection was failed".mysqli_connect_error());
+}
+else{
+echo "connection was successfull";
+}
+
+$sql="UPDATE db_table set name='Harshit' where name='John'";
+$result=mysqli_query($conn,$sql);
+
+
+?>
+
+
+6)) DELETE 
+
+<?php
+$servername="localhost";
+$username="root";
+$password="";
+$database="db_test";
+
+$conn=mysqli_connect($servername,$username,$password,$database);
+
+
+if(!$conn){
+  die("Sorry connection was failed".mysqli_connect_error());
+}
+else{
+echo "connection was successfull";
+}
+
+$sql="DELETE from db_table where name='harshit';
+$result=mysqli_query($conn,$sql);
+
+
+?>
+
+
+
+
+
+
+
+
+

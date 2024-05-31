@@ -1,0 +1,42 @@
+A)) NOW()       --  SELECT NOW () AS Current_Date_Time; :: 2021-10-24 18:28:44
+B)) CURDATE()   --  SELECT CURDATE () AS CurrentDate;   :: 2021-10-24
+C)) CURTIME()   --  SELECT CURTIME () AS CurrentTime;   :: 18:49:07
+D)) DATE()      --  SELECT DATE ("2021-10-24 18:28:44") AS SHOW_DATE; :: 2021-10-24
+E)) TIME()      --  SELECT TIME ("2021-10-24 18:28:44") AS SHOW_TIME; :: 18:28:44
+ 
+F)) DATE_ADD()  --  SELECT DATE_ADD ("2021-10-24", INTERVAL 15 DAY) AS NEW_DATE;  :: 2021-11-08
+		    SELECT DATE_ADD ("2021-10-24", INTERVAL 5 MONTH) AS NEW_DATE; :: 2022-03-24
+
+G)) DATE_SUB()  --  SELECT DATE_SUB("2021-10-24", INTERVAL 15 DAY) AS NEW_DATE;  :: 2021-10-09
+		    SELECT DATE_SUB("2021-10-24", INTERVAL 5 MONTH) AS NEW_DATE; :: 2021-05-24
+
+H)) DATEDIFF()  --  SELECT DATEDIFF("2021-10-24", "2021-10-09") AS NEW_DATE; ::  15
+		   SELECT DATEDIFF ("2018-05-05", "2008-05-05") AS NEW_DATE; :: 3652
+
+J)) DAYNAME()   -- "SELECT DAYNAME(`insert_time`) as "dayName" from `user`";
+
+K)) DAYOFWEEK() -- "SELECT DAYOFWEEK(`insert_time`) as "dayWeek" from `user`";
+
+L)) DAYOFMONTH() -- "SELECT DAYOFMONTH(`insert_time`) as "dayMonth" from `user`";
+
+M)) DAYOFYEAR()  -- "SELECT DAYOFYEAR(`insert_time`) as "dayYear" from `user`"; 
+
+N)) MONTHNAME()  -- "SELECT monthname(`insert_time`) as "monthName" from `user`";
+
+O)) LAST_DAY()   -- "SELECT LAST_DAY(`insert_time`) as "lastDay" from `user`";
+
+ 	
+    
+
+
+
+1)) YEAR     --   "Select YEAR(`insert_time`) as year from `user` order by id desc";
+2)) MONTH    --   "Select MONTH(`insert_time`) as month from `user` order by id desc or Select DATE_FORMAT(insert_time, '%M') as year from `user` order by id desc";
+3)) DAY      --   "Select DAY(`insert_time`) as day from `user` order by id desc";
+4)) HOUR     --   "Select HOUR(`insert_time`) as hour from `user` order by id desc";
+5)) MINUTE   --   "Select MINUTE(`insert_time`) as min from `user` order by id desc";
+6)) SECOND   --   "Select SECOND(`insert_time`) as sec from `user` order by id desc";
+7)) CAST     --   "Select CAST(2.75 as int) as caste_value";
+8)) ISDATE   --   "SELECT ISDATE('2017-08-25')";      :: 1
+ 
+ 

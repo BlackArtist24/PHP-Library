@@ -1,0 +1,25 @@
+PHP Filter -- 
+
+1))  Integer Validation--:: 
+	<?php
+		$int = 100;
+		if (!filter_var($int, FILTER_VALIDATE_INT) === false) {
+  			echo("Integer is valid");
+		} else {
+  			echo("Integer is not valid");
+		}
+	?>
+
+2)) URL Validation--::
+	<?php
+		$url = "https://www.w3schools.com";
+
+			= filter_var($url, FILTER_SANITIZE_URL);
+		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+  			echo("$url is a valid URL");
+		} else {
+  			echo("$url is not a valid URL");
+		}
+	?>	 
+  
+1 - 2359   1-481    1-  50

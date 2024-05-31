@@ -1,0 +1,14 @@
+1)) char_length      --  "Select char_length(`name`) as length from `user`";
+2)) character_length --  "Select character_length('Enjoy your life with coding') as length";
+3)) concat           --  "SELECT CONCAT(`name`,'_',`email`) as name from user";
+4)) instr            --  "SELECT `name` , INSTR(`name`, 'a') as position from user";
+5)) repeat           --  "Select REPEAT('H',5)";
+6)) reverse          --  "Select name , REVERSE(`name`)";    
+7)) ltrim            --  "Select ltrim()";
+8)) rtrim            --  "SELECT `name`, RTRIM(`name`) AS rtrim_name FROM `user`"; 
+9)) ltrim            --  "SELECT `name`, LTRIM(`name`) AS ltrim_name FROM `user`"; 
+10)) ucase           --  "Select `name` , UCASE(`name`) as upper from `user`";
+11)) lcase           --  "Select `name` , LCASE(`name`) as lower from `user`";
+12)) substring       --  "SELECT SUBSTRING(`poem` ,1,5) as "extractString" from `user`";
+13)) replace         --  "SELECT replace('GFG' , 'G' , 'T')";
+ 

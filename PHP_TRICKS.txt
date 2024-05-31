@@ -1,0 +1,6 @@
+1)) To get insertid on inserting a row in mysql using PHP:
+	$insertID=$this->mysqli_user->insert_id;
+
+2))To increment or decrement a column value in mysql:
+	column = column+1		column = column-1
+	(busylevel = busylevel+1)	(busylevel = busylevel-1)

@@ -1,0 +1,3 @@
+1)) Select * from `user` where date(`insert_time`) = '2024-01-30';
+2)) Select * from `user` where date(`insert_time`) = '2024-01-31';
+3)) Select * from `user` where date(`insert_time`) = '2024-01-30' and (time(`insert_time`) > '12:30:24' and time(`insert_time`) < '18:00:24');

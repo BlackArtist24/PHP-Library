@@ -1,0 +1,10 @@
+Filters--
+
+1)) Email Validation   :: filter_var($var,FILTER_VALIDATE_EMAIL)
+2)) Integer Validatoin :: filter_var($var,FILTER_VALIDATE_INT)	
+3)) Float Validatoin   :: filter_var($var,FILTER_VALIDATE_FLOAT)
+4)) URL Validation     :: filter_var($var,FILTER_VALIDATE_URL)	
+5)) IP Validation      :: filter_var($var,FILTER_VALIDATE_IP)	
+6)) MAC Validation     :: filter_var($var,FILTER_VALIDATE_MAC)
+7)) Sanitize Email     :: filter_var($var,FILTER_SANITIZE_EMAIL)
+8)) Filter Callback    :: 

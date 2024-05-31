@@ -1,0 +1,19 @@
+function CdnBase64Upload($user_image){
+        $s3Client = new S3Client([
+            'version' => 'latest',
+            'region'  => $GLOBALS['AppConfig']['CdnRegion'],
+            'credentials' => [
+                'key'    => $GLOBALS['AppConfig']['CdnKey'],
+                'secret' => $GLOBALS['AppConfig']['CdnSecret']
+            ]
+        ]);
+
+        $bucket = $GLOBALS['AppConfig']['CdnBucket'];
+        $filename='vantara2024/transparent/transparent'."_".date('Y_m_d_H_i_s')."_".rand(1000,9999).'.png';
+        $tmp = explode('.', $user_image);
+        $tmpData = end($tmp);
+        $imageData = base64_decode($tmpData);
+        $upload = $s3Client->upload($bucket, $filename, $imageData, 'public-read');
+        return  $upload->get('ObjectURL');
+                                        
+    }

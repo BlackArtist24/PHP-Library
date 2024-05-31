@@ -1,0 +1,31 @@
+public function setImage_UsingLink(){
+        // $filename = 'uploads/user_image/user_image_2024_01_30_14_14_13_65283.mp4'; 
+        // $filename = 'uploads/user_image/user_image_2024_01_30_14_07_55_25775.jpeg';
+        $filename = 'uploads/user_image/user_image_2024_01_30_14_14_06_79678.mpeg';
+
+        // $cfile = $this->getCurlValue($filename,$_FILES["user_image"]["type"],$_FILES["user_image"]["name"]);
+        // $cfile = $this->getCurlValue($filename,'image/jpeg','user.jpeg');
+        // $cfile = $this->getCurlValue($filename,'video/mp4','video.jpeg');
+        $cfile = $this->getCurlValue($filename,'audio/mp3','audio.jpeg');
+        $data = array('file' => $cfile);
+
+        $ch = curl_init();
+        $options = array(CURLOPT_URL => 'https://theroundrectangle.com/olivr_events/yash/olivrweb/user/UserApi.php/setFinalImage',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLINFO_HEADER_OUT => true, //Request header
+                    CURLOPT_HEADER => false, //Return header
+                    CURLOPT_SSL_VERIFYPEER => false, //Don't veryify server certificate
+                    CURLOPT_POST => true,
+                    CURLOPT_POSTFIELDS => $data
+                    );
+        curl_setopt_array($ch, $options);
+        $result = curl_exec($ch);
+        $resultArr = json_decode($result,true);
+        curl_close($ch);
+        if(isset($resultArr['status']) && $resultArr['status']==1){
+            $response = array('status'=>true,'message'=>'Image upload to server success');
+        }else{
+            $response = array('status'=>false,'message'=>'Image upload to server failed');
+        }
+        echo json_encode($response, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }

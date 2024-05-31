@@ -1,0 +1,39 @@
+ public function setImage(){
+        if (isset($_FILES["user_image"]["size"]) && $_FILES["user_image"]["size"] > 0){
+            $image = "user_image_".date('Y_m_d_H_i_s').'_'.rand(11111,99999);
+            $sourcePath = $_FILES['user_image']['tmp_name'];
+            $extension = explode("/", $_FILES["user_image"]["type"]);
+            $targetPath = "uploads/user_image/" . $image . "." . $extension[1]; // Target path where file is to be stored
+            $dbPath = "uploads/user_image/" . $image . "." . $extension[1];
+            if (move_uploaded_file($sourcePath, $targetPath)) {
+                $filename = $dbPath;
+                $cfile = $this->getCurlValue($filename,$_FILES["user_image"]["type"],$_FILES["user_image"]["name"]);
+                // $cfile = $this->getCurlValue($filename,'image/jpeg','user.jpeg');
+                $data = array('file' => $cfile);
+
+                $ch = curl_init();
+                $options = array(CURLOPT_URL => 'https://theroundrectangle.com/olivr_events/yash/olivrweb/user/UserApi.php/setFinalImage',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLINFO_HEADER_OUT => true, //Request header
+                            CURLOPT_HEADER => false, //Return header
+                            CURLOPT_SSL_VERIFYPEER => false, //Don't veryify server certificate
+                            CURLOPT_POST => true,
+                            CURLOPT_POSTFIELDS => $data
+                            );
+                curl_setopt_array($ch, $options);
+                $result = curl_exec($ch);
+                $resultArr = json_decode($result,true);
+                curl_close($ch);
+                if(isset($resultArr['status']) && $resultArr['status']==1){
+                    $response = array('status'=>true,'message'=>'Image upload to server success');
+                }else{
+                    $response = array('status'=>false,'message'=>'Image upload to server failed');
+                }
+            }else{
+                $response = array('status'=>false,'message'=>'User image upload failed');
+            }
+        }else{
+            $response = array('status'=>false,'message'=>'Please select the user image');
+        }
+        echo json_encode($response, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }

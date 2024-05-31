@@ -1,0 +1,20 @@
+1) Last 30 sec
+   where `insert_time`> now() - interval 30 second  // 30 minute
+
+2) Next 30 sec
+   where `insert_time`> now() + interval 30 second  // 30 minute
+
+3)Last 7 days -
+ where `insert_time`>Date_sub(now(), interval 7 day)
+
+4)Next 7 days -
+ where `insert_time`>Date_add(now(), interval 7 day)
+
+/*Yesterday to Upcomming 7 days*/
+5. where releasedate >= DATE_ADD(NOW(), INTERVAL -1 DAY) and  releasedate < DATE_ADD(NOW(), INTERVAL 7 DAY)
+
+/*Now to Upcomming 7 Days entry */
+6.  where releasedate BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY) 
+
+/* Todays Entry*/
+7.  where date(adddate) = CURDATE();

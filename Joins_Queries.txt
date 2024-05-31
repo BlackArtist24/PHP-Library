@@ -1,0 +1,29 @@
+
+------------>>>>>>>>>https://www.w3resource.com/sql-exercises/sql-joins-exercises.php
+
+1)) "Select s.name , c.cust_name , s.city from salesman s left join  customer c on s.salesman_id = c.salesman_id";
+2)) "Select c.ord_no , o.purch_amt , c.cust_name , c.city from orders o inner join customer c where o.purch_amt between 500 and 2000";   
+3)) "Select c.cust_name , c.city , s.name , s.commission from customer c inner join salesman s  on c.custid = s.custid";
+4)) "Select c.cust_name , c.city , s.name , s.commission from customer c inner join salesman s ON s.salesman_id  = c.salesman_id where s.salesman_id *100 >12 ";
+5)) "Select c.cust_name , c.city , s.name , s.city , s.commission from customer c inner join salesman s ON s.salesman_id = c.salesman_id where s.city != c.city and s.commission > 0.12";
+6)) "Select o.ord_no , o.ord_date , o.purch_amt , c.cust_name , c.grade , s.name , s.commission from salesman s left join customer c ON s.salesman_id = c.salesman_id left join orders ON s.salesman_id = o.salesman_id";
+7)) "Select c.cust_name ,  c.city , c.grade , s.name , s.city from customer c inner join salesman s ON s.salesman_id = c.salesman_id order by c.customer_id ASC";
+8)) "Select c.cust_name , c.city , c.grade , s.name , s.city from customer c inner join salesman s on s.salesman_id = c.salesman_id order by c.customer_id ASC";
+9)) "Select c.cust_name , c.city , c.grade , s.name , s.city from customer c left outer join salesman s ON s.salesman_id = c.salesman_id where c.grade < 300 order by customer_id ASC";
+10)) "Select c.cust_name , c.city , o.ord_no , o.ord_date , o.purch_amt from orders o right outer join customer c on o.customer_id = c.customer_id order by ord_date ASC ";
+11) 
+13)) "Select c.cust_name , c.city , c.grade , o.ord_no , o.ord_date , o.purch_amt from 	customer c left outer join  salesman s ON s.salesman_id = c.salesman_id left outer join orders ON s.salesman_id = o.salesman_id ";
+
+14)) "Select c.cust_name , c.city , o.ord_no , o.ord_date , o.purch_amt , s.name , s.commission from customer c left outer join orders o ON ";
+28)) "Select e.EMP_FNAME , e.EMP_LNAME , ed.DPT_NAME from emp_details e inner join emp_department ed where ed.DPT_ALLOTMENT > 50000 "; 
+29)) "Select ed.DPT_NAME from emp_department ed inner join emp_details e ON ed.DPT_CODE = e.EMP_DEPT group by e.EMP_DEPT having count(e.EMP_DEPT)> 2";
+25)) "Select i.PRO_NAME , i.PRO_PRICE , c.COM_NAME from company_mast c inner join item_mast i ON c.COM_ID = i.PRO_COM where i.PRO_ID = (Select i.PRO_ID from item_mast i where i.PRO_COM = c.COM_ID)";
+16)) "Select c.cust_name , c.city , o.ord_no , o.ord_date , o.purch_amt from customer c inner join orders o ON o.salesman_id = c.salesman_id where c.grade !='' group by o.customer_id having count(*) >2 ";
+17)) "Select s.salesman_id , s.name , s.city , s.commission from salesman s left outer join customer c ON c.salesman_id = s.salesman_id ";
+9)) "Select c.cust_name , c.city ,  c.grade , s.name , scity from customer c left outer join salesman s ON s.salesman_id = c.salesman_id where c.grade < 300";
+13)) "Select s.salesman_id , s.name , s.city , s.commission from customer c Right Outer Join salesman s ON s.salesman_id = c.salesman_id Left outer join ON s.salesman_id = o.salesman_id";
+14)) "Select s.salesman_id , s.name , s.city , s.commissoin from customer c right outer join salesman s ON c.salesman_id = s.salesman_id left outer join orders o ON s.salesman_id = o.salesman_id where o.purch_amt > 2000 and c.grade!=''";
+15)) "Select c.cust_name , c.city , o.ord_no , o.ord_date , o.purch_amt from customer c left outer join orders o ON c.customer_id = o.customer_id";
+16)) "Select c.cust_name , c.city , o.ord_no , o.ord_date , o.purch_amt from customer c left outer join orders o ON o.customer_id = c.customer_id where c.grade!=''";
+17)) "Select c.COM_NAME , AVG(i.PRO_PRICE) from company_mast c inner join item_mast i ON c.COM_ID = i.PRO_COM group by c.COM_ID having AVG(i.PRO_PRICE)>350 ";
+

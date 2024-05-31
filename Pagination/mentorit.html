@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-language" content="en-us" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="olivrweb/mentorit/fontawesome-free-5.13.0-web/css/all.css"
+    />
+    <!-- <link href="olivrweb/mentorit/bootstrap.min.css" rel="stylesheet" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"
+    />
+    <title>DASHBOARD</title>
+    <style>
+      html,
+      body {
+        background: #fff;
+        overflow-y: scroll;
+      }
+
+      .card-mbot {
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        padding: 0 0 20px 0;
+        margin: 0;
+      }
+
+      .card-header span a {
+        float: right;
+      }
+
+      .dashboard_content {
+        padding: 40px 0;
+        width: 96%;
+        margin: 0 auto;
+      }
+
+      .card-header span.large {
+        float: right;
+        width: 340px;
+      }
+
+      .card-header span.small {
+        float: right;
+        width: 240px;
+      }
+
+      .card-header span p {
+        float: left;
+      }
+
+      .card-header span select {
+        float: left;
+      }
+
+      .card-header span a {
+        float: right;
+      }
+
+      .card-header span .btn_header {
+        float: left;
+        padding: 3px 10px;
+        margin-left: 15px;
+        color: #fff;
+        font-weight: 100;
+        background-color: #007bff;
+        border-color: #0062cc;
+      }
+
+      .box_height {
+        /*height: 350px;*/
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+
+      .rowmargin {
+        margin-bottom: 40px;
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+        background: #a4a4a4;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        margin: 0px;
+        width: 3px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #000;
+        border-radius: 10px;
+        min-height: 30px;
+        max-height: 30px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.75);
+      }
+
+      #UserDtls .modal-dialog {
+        max-width: 700px;
+      }
+
+      .btn-primary {
+        color: #fff !important;
+      }
+
+      #alert_div {
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        width: 300px;
+        text-align: center;
+        margin-left: -150px;
+        border-radius: 10px;
+        display: none;
+        color: #a94442;
+        background-color: #f2dede;
+        padding: 10px 0;
+        z-index: 9999;
+        font-weight: normal;
+        border: 1px solid #ebccd1;
+        font-size: 80%;
+      }
+
+      .paginate_button {
+        border-radius: 0 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="dashboard_content">
+      <div class="row rowmargin d-none">
+        <div class="col-md-6" style="display: block">
+          <div class="card" style="height: 150px">
+            <div class="card-header"><strong>Analytics</strong></div>
+            <div
+              class="row rowmargin"
+              style="padding: 20px 20px 0px 20px"
+              style="height: 150px"
+            >
+              <div class="col-md-3">
+                <a
+                  href="./olivrweb/analytics/DownloadApi.php/fulldownload"
+                  target="_blank"
+                  class="btn btn-warning"
+                  >Download Full Analytics</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="display: block">
+          <div class="card" style="height: 150px">
+            <div class="card-header"><strong>Single Analytics</strong></div>
+            <div
+              class="row rowmargin"
+              style="padding: 20px 20px 0px 20px"
+              style="height: 150px"
+            >
+              <div class="col-md-3">
+                <a
+                  href="./olivrweb/analytics/DownloadApi.php/singledownload?id=1"
+                  target="_blank"
+                  class="btn btn-warning"
+                  >Chat Download</a
+                >
+              </div>
+              <div class="col-md-3">
+                <a href="javascript:fn_getfeedbackDwn()" class="btn btn-warning"
+                  >Feedback Download</a
+                >
+              </div>
+              <div class="col-md-3">
+                <a href="javascript:fn_getQuizScore(1)" class="btn btn-warning"
+                  >Download Quiz Score</a
+                >
+                <a href="#" class="quizdelete btn btn-danger">Delete Quiz</a>
+              </div>
+              <div class="col-md-3 d-none">
+                <a
+                  href="./olivrweb/analytics/DownloadApi.php/singledownload?id=10"
+                  target="_blank"
+                  class="btn btn-warning"
+                  >Bid Download</a
+                >
+              </div>
+              <div class="col-md-3 d-none">
+                <a
+                  href="./olivrweb/analytics/DownloadApi.php/singledownload?id=11"
+                  target="_blank"
+                  class="btn btn-warning"
+                  >Blind Assocation Download</a
+                >
+              </div>
+              <div class="col-md-3 d-none">
+                <a
+                  href="./olivrweb/analytics/DownloadApi.php/singledownload?id=12"
+                  target="_blank"
+                  class="btn btn-warning"
+                  >Bazzar Download</a
+                >
+              </div>
+              <div class="col-md-3 d-none">
+                <a
+                  href="./olivrweb/analytics/DownloadApi.php/singledownload?id=13"
+                  target="_blank"
+                  class="btn btn-warning"
+                  >Food Download</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row rowmargin">
+                <div class="col-md-12">
+                    <div class="card" style="height: 700px;">
+                        <div class="card-header d-none">
+                            <strong>Tunnel Information</strong>
+                            <span class="large">
+                                <p id="tCount"></p> -->
+      <!-- <a href="javascript:fn_deleteAllUsers()" class="btn btn-danger">Delete All</a>  -->
+      <!-- <a href="javascript: DownloadRegisteredUser()" class="btn btn-warning">Download</a> -->
+      <!-- </span>
+                        </div>
+                        <div class="card-body box_height">
+                            <table class="table table-hover d-none">
+                                <tr>
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">Tunnel Name</th>
+                                    <th scope="col">URL</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                <tbody id="tunnel_details"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+      <table id="UserDataTable" class="display" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>User Image</th>
+            <th>QR Image</th>
+            <th>Insert Time</th>
+            <th>Update Time</th>
+          </tr>
+        </thead>
+
+        <tfoot>
+          <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>User Image</th>
+            <th>QR Image</th>
+            <th>Insert Time</th>
+            <th>Update Time</th>
+          </tr>
+          
+        </tfoot>
+
+        <!-- <tbody> -->
+        <tbody id="image_details"></tbody>
+      </table>
+      <!-- <div class="row rowmargin" style="display:block;">
+            <div class="col-md-12">
+                <div class="card" style="height: 890px;">
+                    <div class="card-header">
+                        <strong>Login Users Details</strong>
+                        <span class="large">
+                     <p id="loginCount"></p>
+                     <a href="javascript:DownloadLoginUser()" class="btn btn-warning">Download</a>
+                  </span>
+                    </div>
+                    <div class="card-body box_height">
+                        <table class="table table-hover">
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email Id</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">First Login Time</th>
+                                <th scope="col">Last Login Time</th>
+                                <th scope="col">Last Scene</th>
+                                <tr>
+                                    <tbody id="login_users">
+                                    </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+      <!--Active Users Details-->
+      <!-- <div class="row rowmargin" style="display:block;">
+            <div class="col-md-12">
+                <div class="card" style="height: 890px;">
+                    <div class="card-header"><strong>Active Users Details</strong><span class="large"><p id="activeCount"></p> &nbsp; <a href="javascript:fn_logoutAllUser()" class="btn btn-danger"><strong>Logout All</strong></a><a href="javascript: DownloadActiveUser()" class="btn btn-warning ">Download</a></span></div>
+                    <div class="card-body box_height">
+                        <table class="table table-hover">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Email Id</th>
+                                <th scope="col">First Login TIme</th>
+                                <th scope="col">Last Login TIme</th>
+                                <th scope="col">Last Seen Time</th>
+                                <tr>
+                                     image_details
+                                    <tbody id="active_user">
+
+                                    </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div> -->
+
+      <!--Chat User-->
+      <div class="row rowmargin d-none">
+        <div class="col-md-12">
+          <div class="card" style="height: 890px">
+            <div class="card-header">
+              <strong>Chat Details</strong
+              ><span class="large">
+                <a
+                  href="./olivrweb/analytics/DownloadApi.php/singledownload?id=1"
+                  class="btn_header"
+                  >Download</a
+                ></span
+              >
+            </div>
+            <div class="card-body box_height">
+              <table class="table table-hover">
+                <tr>
+                  <th scope="col">Chat ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Msg</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Delete</th>
+                </tr>
+                <tbody id="chat_list"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row rowmargin">
+            <div class="col-md-12">
+                <div class="card" style="height: 700px;">
+                    <div class="card-header"><strong>User Call Join Request</strong></div>
+                    <div class="card-body box_height" style="height: 514px;">
+                        <table class="table table-hover">
+                        <tbody><tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email Id</th>
+                            <th scope="col">Start Video</th>
+                            <th scope="col">Stop Video</th>
+                        </tr>
+                        </tbody>
+                            <tbody id="call_users"></tbody>
+    
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+      <!--  -->
+      <!-- <div class="row rowmargin"> -->
+      <!-- <div class="col-md-6">
+                <div class="card rowmargin">
+                    <div class="card-header"><strong>Welcome Text</strong></div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="welcome_txt">
+                        </div>
+                        <a onclick="setWelcomeText()" class="btn btn-primary">Submit</a>
+                    </div>
+                </div>
+               
+            </div> -->
+      <!-- <div class="col-md-6">
+                <div class="card rowmargin">
+                    <div class="card-header"><strong>Platform Notification</strong></div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="notification_txt">
+                        </div>
+                        <a href="javascript:void(0)" id="notification_submit" class="btn btn-primary">Submit</a>
+                    </div>
+                </div>
+            </div> -->
+      <!-- <div class="col-md-6">
+                <div class="card rowmargin">
+                    <div class="card-header"><strong>Push Notification</strong></div>
+                    <div class="card-body">
+
+                        <form id="sendNotification">
+                            <div class="form-group">
+                                <label>Notification Title</label>
+                                <input type="text" name="title" class="form-control" id="notification_txt" placeholder="title">
+                            </div>
+                            <div class="form-group">
+                                <label>Notification Body</label>
+                                <input type="text" name="body" class="form-control" id="notification_txt" placeholder="body">
+                            </div>
+                            <div class="form-group">
+                                <label>Redirect Url</label>
+                                <input type="text" name="url" class="form-control" id="notification_txt" placeholder="url">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Notification</button>
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+      <!-- <div class="col-md-6"> -->
+      <!-- <div class="card rowmargin">
+                    <div class="card-header">
+                        <strong>(Audi 1)- Live Webcast</strong>
+                        <span class="small">
+                            <select name="webscast" id="webscast1">
+                                <option value="0">None</option>
+                                <option value="1">Show Live Streaming</option>
+                                <option value="2">Show Conference</option>
+                            </select>
+                            <a id="lobbywebcast1_button" href="javascript:void(0)" class="btn_header">Submit</a>
+                        </span>
+                    </div>
+                </div> -->
+      <!-- <div class="card rowmargin">
+                    <div class="card-header">
+                        <strong>Force Page</strong>
+                        <span class="small">
+                            <select id="lobbyforce">
+                                <option value="FREE">Free</option>
+                                <option value="lobby2.html">Lobby - 2 </option>
+                                <option value="auditorium.html">Auditorium</option>
+                                <option value="quiz.html">Quiz</option>
+                                <option value="photobooth.html">Photobooth</option>
+                                <option value="thank-you.html">Thank You</option>
+                                <option value="holiday.html">Holiday</option>
+                            </select>
+                            <a id="forcepage_submit" href="javascript:void(0)" class="btn_header">Submit</a>
+                        </span>
+                    </div>
+                </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- <div class="row rowmargin"> -->
+      <!-- <div class="col-md-6 "> -->
+      <!-- <div class="card rowmargin"> -->
+      <!-- <div class="card-header">
+                        <strong>Home Video 1</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isvideo1 individal_extrainfo" data-infokey="isvideo1" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Video 2</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isvideo2 individal_extrainfo" data-infokey="isvideo2" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Video 3</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isvideo3 individal_extrainfo" data-infokey="isvideo3" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Enter Event Button</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isnextevent individal_extrainfo" data-infokey="isnextevent" name="value" value="1">
+                        </span>
+                    </div>
+
+                    <div class="card-header">
+                        <strong>Home Quiz Button</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active ishomequiz individal_extrainfo" data-infokey="ishomequiz" name="value" value="1">
+                        </span>
+                    </div>
+
+                    <div class="card-header">
+                        <strong>Home Quiz Day 1</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz1 individal_extrainfo" data-infokey="isquiz1" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Quiz Day 2</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz2 individal_extrainfo" data-infokey="isquiz2" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Quiz Day 3</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz3 individal_extrainfo" data-infokey="isquiz3" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Quiz Day 4</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz4 individal_extrainfo" data-infokey="isquiz4" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Quiz Day 5</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz5 individal_extrainfo" data-infokey="isquiz5" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Quiz Day 6</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz6 individal_extrainfo" data-infokey="isquiz6" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Home Quiz Day 7</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz7 individal_extrainfo" data-infokey="isquiz7" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Auditorium Hand Raise</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active ishandraise individal_extrainfo" data-infokey="ishandraise" name="value" value="1">
+                        </span>
+                    </div> -->
+      <!-- <div class="card-header">
+                        <strong>Main Quiz</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isquiz8 individal_extrainfo" data-infokey="isquiz8" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Chat</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active ischat individal_extrainfo" data-infokey="ischat" name="value" value="1">
+                        </span>
+                    </div>
+        
+                    <div class="card-header">
+                        <strong>Lobby Announcement</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active islobby_announcement individal_extrainfo" data-infokey="islobby_announcement" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Lobby - 2 </strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active islobby2 individal_extrainfo" data-infokey="islobby2" name="value" value="1">
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <strong>Menu</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active ismenu individal_extrainfo" data-infokey="ismenu" name="value" value="1">
+                        </span>
+                    </div>
+                    
+                    <div class="card-header ">
+                        <strong>Ask Question</strong>
+                        <span class="small">
+                            <input type="checkbox" class="lobby_active isask_question individal_extrainfo" data-infokey="isask_question" name="value" value="1">
+                        </span>
+                    </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- <div class="col-md-6">
+                <div class="card rowmargin">
+                    <div class="card-header">
+                        <strong>Extra Scene</strong>
+                        <span class="small">
+                            <form class="extrainfo_submit">
+                                <select id="key" name="key">
+                                    <option value="ismenu">Menu</option>
+                                    <option value="islobby_announcement">Lobby Announcement</option>
+                                    <option value="isask_question">Ask a Question</option>
+                                </select>
+                                <select id="value" name="value">
+                                    <option value="1">Enable</option>
+                                    <option value="0">Disable</option>
+                                </select>
+                                <button type="submit" class="btn_header">Submit</a>
+                            </form>
+                        </span>
+                    </div>
+                </div>
+            </div>  -->
+      <!-- </div> -->
+
+      <!-- Chat Edit -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Answer To Chat</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="editchat">
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="inputEmail4">Name</label>
+                    <input type="hidden" class="form-control" name="chatid" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      placeholder="Email"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Session</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="agendatitle"
+                      placeholder="Password"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Session Start Time</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="agendastarttime"
+                      placeholder="A"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Chat Message</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      name="chatmessage"
+                      placeholder="Chat Message"
+                    ></textarea>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Chat Tags</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      name="chattags"
+                      placeholder="Chat Tags"
+                    ></textarea>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Chat Time</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="chattime"
+                      placeholder="Chat Time"
+                      readonly
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Answer Message</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      name="chatanswer"
+                      placeholder="Answer Message"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Answer Tags</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      name="chatanswertags"
+                      placeholder="Chat Answer Tags"
+                    ></textarea>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputPassword4">Answer Time</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="answertime"
+                      placeholder="Answer Time"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-12 mt-3 text-center">
+                    <button
+                      type="submit"
+                      id="btn_register"
+                      class="btn btn-primary"
+                    >
+                      Submit Answer
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="alert_div"></div>
+
+      <div class="row rowmargin d-none">
+        <div class="col-md-12" style="display: block">
+          <div class="card" style="height: 150px">
+            <div class="card-header"><strong>Database Clear Zone</strong></div>
+            <div
+              class="row rowmargin"
+              style="padding: 20px 20px 0px 20px"
+              style="height: 150px"
+            >
+              <div class="col-md-3">
+                <a data-slug="ClearChat" class="btn btn-danger clearzone"
+                  >Remove Chat data</a
+                >
+              </div>
+              <div class="col-md-3">
+                <a data-slug="ClearMessageWall" class="btn btn-danger clearzone"
+                  >Remove Message Wall Data</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tunnel Update -->
+      <div
+        class="modal fade"
+        id="tunnel_update_popup"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Tunnel Update</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <form id="tunnelupdate" method="post">
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label>Tunnel Name</label>
+                        <input
+                          type="hidden"
+                          class="form-control"
+                          name="id"
+                          placeholder="Serial Number"
+                          required
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="tunnelname"
+                          placeholder="Tunnel Name"
+                          required
+                        />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>URL</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="url"
+                          placeholder="Tunnel URL"
+                          required
+                        />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Status</label>
+                        <select name="status" class="form-control">
+                          <option value="0">Blocked</option>
+                          <option value="1">Active</option>
+                        </select>
+                        <!-- <input type="text" class="form-control" name="status" placeholder="Status" required> -->
+                      </div>
+                      <div class="col-md-12 text-center">
+                        <button class="btn btn-primary tunnelproduct_btn">
+                          Update Tunnel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <script src="olivrweb/mentorit/bootstrap.min.js"></script> -->
+      <script src="olivrweb/mentorit/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+      <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+      <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> -->
+      <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css"
+      />
+      <script src="olivrlib/sweetalert/SweetAlert.js"></script>
+
+      <!--  Extra Lib-->
+      <!-- <script src="olivrweb/user/loginadminmanager.js"></script> -->
+      <!-- <script src="olivrweb/scene/sceneadminmanager.js"></script> -->
+      <!-- <script src="olivrweb/game/gameadminmanager.js"></script>
+<script src="olivrweb/quiz/quizadminmanager.js"></script> -->
+      <!-- <script src="olivrweb/chat/chatadminmanager.js"></script> -->
+      <!-- <script src="olivrweb/callstatus/callstatusadminmanager.js"></script> -->
+      <!-- <script src="olivrweb/firebase/firebaseadminmanager.js"></script>
+<script src="olivrweb/clearzone/clearzonemanager.js"></script> -->
+      <script src="olivrweb/information/informationmanager.js"></script>
+      <script src="olivrweb/mentorit/mentoritmanager.js"></script>
+      <!-- <script src="olivrweb/tunnel/tunnelmanager.js"></script> -->
+      <!--  Extra Lib End-->
+    </div>
+  </body>
+</html>

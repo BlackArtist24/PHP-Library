@@ -1,0 +1,22 @@
+public function ImagePagination(){
+        $showdatalimit=(int) isset($_POST['showdatalimit'])?mysqli_real_escape_string($this->mysqli_user, $_POST['showdatalimit']):10;
+        $currentpage=(int) isset($_POST['currentpage'])?mysqli_real_escape_string($this->mysqli_user, $_POST['currentpage']):1;
+        $startfrom = ($currentpage - 1)*$showdatalimit;
+
+        if ($showdatalimit == '' || $showdatalimit == null) {
+            $response = array('status' => false, 'message' => "Please enter the data limit!.");
+        }elseif ($currentpage == '' || $currentpage == null) {
+            $response = array('status' => false, 'message' => "Please enter the page number!.");
+        }else {
+            $imageRangeData= mysqli_query($this->mysqli_user,"Select * from `user` where `status`='1' LIMIT $startfrom, $showdatalimit");
+            if (mysqli_num_rows($imageRangeData) > 0) {
+                while($row = mysqli_fetch_assoc($imageRangeData)){
+                    $image_data[] = array('id' => $row['id'], 'name' => $row['name'], 'image' => $row['image'], 'thumnails' => $row['thumnails'], 'status' => $row['status']);
+                }
+                $response = array('status' => true, "message" => "Success.", "liveuser" => $image_data);
+            } else {
+                $response = array('status' => false, "message" => "No data found.");
+            }
+        }
+        echo json_encode($response);
+    }

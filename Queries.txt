@@ -1,0 +1,66 @@
+QUERIES-->>
+
+1))SELECT `fname`, `email`, `mobile` ,`company`, `user_type`, `first_login_time`, `last_login_time`, `last_seen_time` FROM `user` order by fname
+
+2)) SELECT fname as First_Name, lname as Last_Name, email as Email_ID, mobile as Mobile, registration_time as Registration_Time, first_login_time AS First_Login_Time, last_login_time as Last_Login_Time , last_seen_time as Last_Seen_Time FROM 
+    user WHERE first_login_time != '' 
+    ORDER BY last_seen_time ASC
+
+3)) SELECT fname as First_Name, lname as Last_Name, email as Email_ID, mobile as Mobile, registration_time as Registration_Time, first_login_time AS First_Login_Time, last_login_time as Last_Login_Time , last_seen_time as Last_Seen_Time FROM 
+    user WHERE last_seen_time > '$datetime' 
+    ORDER BY last_seen_time ASC
+
+4))SELECT u.fname, u.email, u.mobile, CAST(SUM(TIME_TO_SEC(TIMEDIFF(end_time,start_time)))/60 AS INT) AS time_spend_min from 
+user as u inner join login_token as lt on u.id=lt.uid 
+where lt.status=1 group by u.id
+
+5)) SELECT u.`fname`, u.`email`, u.`mobile` ,u.`company`, u.`user_type`, u.`first_login_time`, u.`last_login_time`, end_time as `last_seen_time` FROM 
+`login_token` as lt left join user as u on u.id=lt.uid
+ WHERE end_time like '%2021-10-09%' 
+group by lt.uid order by u.fname
+
+6)) SELECT u.fname, u.email, u.mobile, CAST((sum(gs.`score`)+sum(gs.`extrainfo`)/4) AS INT)  as score from 
+game_score as gs left join user as u on u.id=gs.uid 
+group by gs.uid order by score DESC limit 10
+
+8)) SELECT u.fname, u.mobile, sum(gs.`score`) as score from 
+game_score as gs left join user as u on u.id=gs.uid 
+group by gs.uid order by score DESC
+
+9)) SELECT u.fname, u.mobile, gs.score as score, g.name as Game from 
+game_score as gs left join user as u on u.id=gs.uid left join game as g on g.id=gs.gameid 
+order by score DESC
+
+10)) SELECT c.id, u.fname, u.email, u.mobile, u.company, u.user_type, c.msg, c.timestamp FROM
+ `chat` as c left join user as u on u.id=c.sid
+
+11)) SELECT u.fname, u.mobile,u.email, CAST((sum(gs.`score`)+sum(gs.`extrainfo`)/4) AS INT) as score from
+ game_score as gs left join user as u on u.id=gs.uid 
+where date(gs.timestamp)='2021-10-10' 
+group by gs.uid order by score desc
+
+12)) SELECT f.id, u.fname, u.email, f.option1,f.option2, f.option3, f.option4, f.option5, f.option6, f.option7, f.option8, f.option9, f.option10, f.timestamp FROM 
+`feedback` as f left join user as u on u.id=f.uid
+
+13)) SELECT u.fname, u.email, u.mobile, u.user_type, p.panelid, p.sourceid, p.isview, p.timestamp, p.updatetime FROM
+ `user_panel_mgmt` as p left join user as u on u.id=p.uid
+
+14)) SELECT pi.id, u.fname, u.email, u.mobile, CONCAT('https://cpdditapac2021.com/olivrweb/photoboothimage/',pi.image)  as imagePath, pi.timestamp FROM
+ `photobooth_image` as pi left join user as u on u.id=pi.uid
+
+15)) SELECT u.fname, u.mobile, um.fname as MemberName, u.mobile, gh.`score` as Bid, gameid-3 as BidID, `timestamp` FROM
+ `game_score_history` as gh left join user as u on u.id=gh.uid left join user_member as um on um.id=gh.memberid 
+  where gameid IN (4,5,6) 
+  order by gameid asc, Bid desc
+
+16)) SELECT u.fname, u.mobile, um.fname as MemberName, u.mobile, gameid-17 as BazzarID, `timestamp` FROM
+    `game_score_history` as gh left join user as u on u.id=gh.uid left join user_member as um on um.id=gh.memberid 
+     where gameid IN (18,19,20,21)
+
+17)) SELECT u.fname, u.mobile, um.fname as MemberName, u.mobile, gameid-17 as BazzarID, `timestamp` FROM
+    `game_score_history` as gh left join user as u on u.id=gh.uid left join user_member as um on um.id=gh.memberid 
+     where gameid IN (18,19,20,21)
+
+18)) SELECT u.fname, u.mobile, um.fname as MemberName, u.mobile, `timestamp` FROM
+    `game_score_history` as gh left join user as u on u.id=gh.uid left join user_member as um on um.id=gh.memberid 
+     where gameid IN (7)

@@ -1,0 +1,22 @@
+public function setFinalImage(){
+        // print_r($_FILES['file']);
+        if(isset($_FILES["file"]["size"]) && $_FILES["file"]["size"] > 0){
+           
+            $image = "user_image_".date('Y_m_d_H_i_s').'_'.rand(11111,99999);
+            $sourcePath = $_FILES['file']['tmp_name'];
+            $extension = explode("/", $_FILES["file"]["type"]);
+            $targetPath = "uploads/user_image/" . $image . "." . $extension[1]; // Target path where file is to be stored
+            $dbPath = "uploads/user_image/" . $image . "." . $extension[1];
+            if (move_uploaded_file($sourcePath, $targetPath)) {
+                $response = array('status'=>true,'message'=>'User image upload success!');
+            }else{
+                $response = array('status'=>false,'message'=>'User image upload failed!');
+            }
+        }else{
+            $response = array('status'=>false,'message'=>'User image not found!');
+        }
+        // print_r($_FILES['file']['name']);
+        // print_r($_FILES['file']);
+        
+        echo json_encode($response);
+    }

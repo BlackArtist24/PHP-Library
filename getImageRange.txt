@@ -1,0 +1,21 @@
+public function getImageRange()
+    {
+        $upperLimit = mysqli_real_escape_string($this->mysqli_user, trim(isset($_POST['upperLimit']))) ? mysqli_real_escape_string($this->mysqli_user, trim($_POST['upperLimit'])) : '';
+        $lowerLimit = mysqli_real_escape_string($this->mysqli_user, trim(isset($_POST['lowerLimit']))) ? mysqli_real_escape_string($this->mysqli_user, trim($_POST['lowerLimit'])) : '';
+        if ($upperLimit == '' || $upperLimit == null) {
+            $response = array('status' => false, 'message' => "Please enter the lower limit!.");
+        }elseif ($lowerLimit == '' || $lowerLimit == null) {
+            $response = array('status' => false, 'message' => "Please enter the upper limit!.");
+        }else {
+            $imageRangeData= mysqli_query($this->mysqli_user,"Select * from `user_capture` where `id` BETWEEN $lowerLimit AND $upperLimit");
+            if (mysqli_num_rows($imageRangeData) > 0) {
+                while($row = mysqli_fetch_assoc($imageRangeData)){
+                    $image_data[] = array('id' => $row['id'], 'name' => $row['name'], 'image' => $row['image'], 'thumnails' => $row['thumnails'], 'status' => $row['status']);
+                }
+                $response = array('status' => true, "message" => "Success.", "liveuser" => $image_data);
+            } else {
+                $response = array('status' => false, "message" => "No data found.");
+            }
+        }
+        echo json_encode($response);
+    }

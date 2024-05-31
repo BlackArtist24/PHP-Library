@@ -1,0 +1,3 @@
+Even Rows -- Select * from twitter mod(id,2) = 0;
+
+Odd Rows -- Select * from twitter mod(id,2) <> 0;

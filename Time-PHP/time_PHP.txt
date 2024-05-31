@@ -1,0 +1,3 @@
+1)) date('Y-m-d H:i:s', strtotime($this->current_time . ' + 5 minutes')); 		//// Adding 5 minutes to the current time
+2)) $timestamp = strtotime($tour_date);
+    $tour_date = date("Y-m-d", $timestamp);                                             //// Changing time format

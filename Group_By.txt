@@ -1,0 +1,1 @@
+1)) SELECT count(`id`) , date(`insert_time`)  FROM `twitter` group by date(`insert_time`)

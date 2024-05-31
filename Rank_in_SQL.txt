@@ -1,0 +1,3 @@
+RANK --::
+SELECT `id` , `name` , `poem` , DENSE_RANK() OVER (ORDER BY `insert_time`) as "Rank" , `insert_time`
+FROM `user`;

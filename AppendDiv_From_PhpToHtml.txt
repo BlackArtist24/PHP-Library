@@ -1,0 +1,16 @@
+In Api.php File - 
+$query="Select id , device_id , IF(TIMEDIFF(NOW(), update_time) < '00:00:10' ,  '<div class=bg-color-green></div>' ,'<div class=bg-color-red></div>') as 'status' from `device`";
+
+In HTML File - 
+<style>
+        .bg-color-green{
+            width: 30px;
+            height: 30px;
+            background-color: green;
+        }
+        .bg-color-red{
+            width: 30px;
+            height: 30px;
+            background-color: red;
+        }
+    </style>

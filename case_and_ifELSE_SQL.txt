@@ -1,0 +1,19 @@
+1)) IF CASE --::
+    SELECT user.status , user.name , IF(`status` > 1 , true , false) as value from `user`
+
+2)) CASE FUNCTION --::
+    SELECT twitter.id , twitter.name , twitter.handle , CASE
+  	WHEN twitter.status  = 0 THEN 'tweetFetched'
+  	WHEN twitter.status  = 1 THEN 'vision'
+  	WHEN twitter.status  = 3 THEN 'unity'
+  	WHEN twitter.status  = 8 THEN 'rejected'
+  	WHEN twitter.status  = -2 THEN 'humanTweet'
+  	WHEN twitter.status  = 2 THEN 'AnimalTweet'
+  	ELSE 'tweetProcessed'
+  	END as 'tweetStatus' , twitter.status
+   from `twitter`;
+
+3)) COAlESCE FUNCTION --:
+    SELECT customer_name,
+    COALESCE(primary_phone, secondary_phone) as "Phone Number"
+    FROM customers;

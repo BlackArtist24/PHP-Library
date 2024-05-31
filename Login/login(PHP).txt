@@ -1,0 +1,40 @@
+public function login() {
+        $data=array();
+        $email = mysqli_real_escape_string($this->mysqli_user, trim(isset($_POST['email']))) ? mysqli_real_escape_string($this->mysqli_user, trim($_POST['email'])) : '';
+        $password=mysqli_real_escape_string($this->mysqli_user,$_POST['password']);
+
+        if ($email == '' || $email == null){
+            $response=array('status'=>false,"message"=>"Please enter your email.");
+            
+        }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $response=array('status'=>false,"message"=>"Please enter correct email id.");
+            
+        }elseif ($password == '' || $password == null){
+            $response=array('status'=>false,"message"=>"Please enter your password.");
+            
+        }else{
+            $user = DBS::ExecuteScalarRow("SELECT * FROM user WHERE email = ?", array($email));
+            if($user){
+                if($password == $user['password']){
+                    $response=array('status'=>true,"message"=>"Login Successfully.",'user'=>array('name'=>$user['name'], 'email'=>$user['email'], 'mobile'=>$user['mobile'], 'status'=>$user['status']));
+                 }
+                else{
+                    $response=array('status'=>false,"message"=>"Please enter the correct password.");
+                }
+            }
+            else
+            {   
+                $response=array('status'=>false,"message"=>"Please enter the correct email.");
+                    
+            }
+        }
+        echo json_encode($response);
+
+    }
+
+public function logout(){
+    session_start();
+    unset($_SESSION);
+    session_destroy();
+    header("Location: ../../index.php");
+    }
